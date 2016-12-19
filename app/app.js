@@ -22,11 +22,15 @@ import { useScroll } from 'react-router-scroll';
 import LanguageProvider from 'containers/LanguageProvider';
 import configureStore from './store';
 
+import "bootstrap-css-only";
+
 // Import i18n messages
 import { translationMessages } from './i18n';
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
 import 'sanitize.css/sanitize.css';
+
+import './global-styles';
 
 // Create redux store with history
 // this uses the singleton browserHistory provided by react-router
