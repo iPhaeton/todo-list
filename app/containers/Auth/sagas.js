@@ -19,7 +19,7 @@ export function* defaultSaga() {
 function* fetchUser (action) {
   try {
     const user = yield call(fetch, action.payload);
-    router.browserHistory.push('/home');
+    router.browserHistory.push('/todos');
     yield put({type: AUTH_SUCCESS, payload: user});
   } catch (err) {
     yield put({type: AUTH_DENIED, payload: err});
