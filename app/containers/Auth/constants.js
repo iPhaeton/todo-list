@@ -4,4 +4,6 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/Auth/DEFAULT_ACTION';
+const AUTH_ACTION = 'app/Auth/AUTH_ACTION';
+
+export { AUTH_ACTION };
