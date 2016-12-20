@@ -8,10 +8,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import selectAuth from './selectors';
 
-import Form from "./Form";
-import Input from "./Input";
+import Form from './Form';
+import Input from './Input';
 
-import {defaultAction} from "./actions";
+import { defaultAction } from './actions';
 
 export class Auth extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -20,7 +20,7 @@ export class Auth extends React.PureComponent { // eslint-disable-line react/pre
     }
 
     render() {
-        console.log(this.props.username);
+        console.log(this.props.user);
 
         return (
             <div className="container">
@@ -76,8 +76,19 @@ function mapDispatchToProps(dispatch) {
   return {
       onSubmitForm: (event) => {
           event.preventDefault();
-          console.log("Form submitted");
-          dispatch(defaultAction("admin"));
+          
+          //setTimeout(() => {
+              var user = {
+                username: event.target.elements.name.value,
+                password: event.target.elements.password.value
+              };
+              
+              if (user.username === "admin" && user.password === "admin") {
+                  dispatch(defaultAction(null, user));
+              } else {
+                  dispatch(defaultAction(new Error("Wrong username or password")));
+              };
+          //}, 0);
       }
   };
 }

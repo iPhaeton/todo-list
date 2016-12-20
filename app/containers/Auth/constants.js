@@ -4,4 +4,7 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/Auth/DEFAULT_ACTION';
+const DENIED_ACTION = 'app/Auth/DENIED';
+const APPROVED_ACTION = 'app/Auth/APPROVED';
+
+export {DENIED_ACTION, APPROVED_ACTION}
