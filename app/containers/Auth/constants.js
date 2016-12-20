@@ -4,7 +4,6 @@
  *
  */
 
-const DENIED_ACTION = 'app/Auth/DENIED';
-const APPROVED_ACTION = 'app/Auth/APPROVED';
+const AUTH_ACTION = 'app/Auth/AUTH_ACTION';
 
-export {DENIED_ACTION, APPROVED_ACTION}
+export { AUTH_ACTION };
