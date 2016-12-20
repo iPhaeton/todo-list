@@ -54,6 +54,26 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/todos',
+      name: 'todos',
+
+      getComponent(location, cb) {
+        const importModules = Promise.all([
+          System.import('components/Todos'),
+          System.import('containers/TodoInput/reducer'),
+          System.import('containers/TodoInput')
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then (([component, todoInputReducer]) => {
+          injectReducer("todoInput", todoInputReducer.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
