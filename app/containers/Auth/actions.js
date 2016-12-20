@@ -8,7 +8,7 @@ import {
   AUTH_ACTION
 } from './constants';
 
-var router = require('react-router');
+//var router = require('react-router');
 
 export function defaultAction(user) {
   //router.browserHistory.push('/');

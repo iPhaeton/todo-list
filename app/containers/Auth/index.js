@@ -20,90 +20,44 @@ export class Auth extends React.PureComponent { // eslint-disable-line react/pre
     }
 
     render() {
-        console.log(this.props.user);
+      console.log(this.props.user);
 
-        if (this.props.user) {
-        return (
-            <div className="container">
+      return (
+        <div className="container">
 
-                <header>
-                    <h1> TODOS </h1>
-                </header>
+          <header>
+            <h1> TODOS </h1>
+          </header>
 
-                <div className="row">
-                    <div className="col-sm-10"></div>
+          <div className="row">
+            <div className="col-sm-10"></div>
 
-                    <Form className="col-sm-4 col-md-2" onSubmit={this.props.onSubmitForm}>
-                        <div className="form-group">
-                            <label htmlFor="name">Name</label>
-                            <Input
-                                id="name"
-                                type="text"
-                                placeholder="Enter your name"
-                                className="form-control"
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="password">Password</label>
-                            <Input
-                                id="password"
-                                type="password"
-                                placeholder="Enter your password"
-                                className="form-control"
-                            />
-                        </div>
-                        <input type="submit" value="Send" className="btn btn-default"/>
-                    </Form>
-                </div>
+            <Form className="col-sm-4 col-md-2" onSubmit={this.props.onSubmitForm}>
+              <div className="form-group">
+                <label htmlFor="name">Name</label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Enter your name"
+                  className="form-control"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="Enter your password"
+                  className="form-control"
+                />
+              </div>
+              <input type="submit" value="Send" className="btn btn-default"/>
+            </Form>
+          </div>
 
-            </div>
-        );
-        } else {
-            return (
-            <div className="container">
-
-                <header>
-                    <h1> TODOS </h1>
-                </header>
-
-                <div className="row">
-                    <div className="col-sm-10">
-                        
-                    </div>
-
-                    <Form className="col-sm-4 col-md-2" onSubmit={this.props.onSubmitForm}>
-                        <div className="form-group">
-                            <label htmlFor="name">Name</label>
-                            <Input
-                                id="name"
-                                type="text"
-                                placeholder="Enter your name"
-                                className="form-control"
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="password">Password</label>
-                            <Input
-                                id="password"
-                                type="password"
-                                placeholder="Enter your password"
-                                className="form-control"
-                            />
-                        </div>
-                        <input type="submit" value="Send" className="btn btn-default"/>
-                    </Form>
-                </div>
-
-            </div>
-        );
-        }
+        </div>
+      );
     }
-
-    /*onSubmitForm (event) {
-        event.preventDefault();
-
-        console.log("Form submitted");
-    }*/
 }
 
 Auth.propTypes = {

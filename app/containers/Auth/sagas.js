@@ -1,7 +1,12 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import {  takeEvery } from 'redux-saga';
+import {  take, call, put, select } from 'redux-saga/effects';
+
+import fetch from "./fetch";
  
 import {
-  AUTH_ACTION
+  AUTH_ACTION,
+  AUTH_SUCCESS,
+  AUTH_DENIED
 } from './constants';
 
 // Individual exports for testing
@@ -12,11 +17,9 @@ export function* defaultSaga() {
 function* fetchUser (action) {
   try {
     const user = yield call(fetch, action.payload);
-    console.log("success");
-    yield put({type:AUTH_ACTION, user: user});
+    yield put({type: AUTH_SUCCESS, payload: user});
   } catch (err) {
-    console.log("error");
-    yield put({type:AUTH_ACTION, user: err});
+    yield put({type: AUTH_DENIED, payload: err});
   }
 }
 
@@ -24,14 +27,3 @@ function* fetchUser (action) {
 export default [
   defaultSaga,
 ];
-
-function fetch (user) {
-  var request = new Promise ((resolve, reject) => {
-    setTimeout(() => {
-      if (user.username === "admin" && user.password === "admin") resolve(user);
-      else reject(new Error("Wrong credentials"));
-    }, 1000);
-  });
-  
-  return request;
-};
