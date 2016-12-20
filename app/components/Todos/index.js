@@ -10,8 +10,7 @@ import TodoInput from "../../containers/TodoInput";
 
 function Todos() {
   return (
-    <div>
-      Todos here!!!
+    <div className="container">
       <TodoInput/>
     </div>
   );
