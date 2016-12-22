@@ -61,13 +61,14 @@ export default function createRoutes(store) {
         const importModules = Promise.all([
           System.import('components/Todos'),
           System.import('containers/TodoInput/reducer'),
-          System.import('containers/TodoInput')
+          System.import('containers/TodoList/reducer')
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then (([component, todoInputReducer]) => {
+        importModules.then (([component, todoInputReducer, todoListReducer]) => {
           injectReducer("todoInput", todoInputReducer.default);
+          injectReducer("todoList", todoListReducer.default);
           renderRoute(component);
         });
 
