@@ -12,7 +12,7 @@ export function defaultAction(task) {
   return {
     type: NEWTASK_ACTION,
     payload: {
-      task,
+      name: task,
       done:false
     }
   };

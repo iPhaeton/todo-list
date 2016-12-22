@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect';
 
+import { selectTodoInputDomain } from "../TodoInput/selectors";
+
 /**
  * Direct selector to the todoList state domain
  */
@@ -16,7 +18,9 @@ const selectTodoListDomain = () => (state) => state.get('todoList');
 
 const selectTodoList = () => createSelector(
   selectTodoListDomain(),
-  (substate) => substate.toJS()
+  selectTodoInputDomain(),
+  (substateTodoList, substateTodoInput) =>
+    substateTodoInput ? {...substateTodoList.toJS(), ...substateTodoInput.toJS()} : substateTodoList.toJS()
 );
 
 export default selectTodoList;
