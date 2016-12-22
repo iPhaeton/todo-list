@@ -8,21 +8,23 @@ import React from 'react';
 import { connect } from 'react-redux';
 import selectTodoInput from './selectors';
 
+import { defaultAction } from './actions';
+
 export class TodoInput extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     console.log(this.props);
 
-    if (!this.props.user) return (
+    /*if (!this.props.user) return (
       <div>
         <h3>Not authorized!</h3>
       </div>
-    );
+    );*/
 
     return (
       <div>
-        <form>
+        <form onSubmit={this.props.onSubmitForm}>
           <div className="input-group">
-            <input id="todo-input" type="text" className="form-control" placeholder="Enter a task"/>
+            <input id="todoInput" type="text" className="form-control" placeholder="Enter a task"/>
             <span className="input-group-btn">
               <input type="submit" className="btn btn-default" value="Add task"/>
             </span>
@@ -33,11 +35,22 @@ export class TodoInput extends React.PureComponent { // eslint-disable-line reac
   }
 }
 
+TodoInput.propTypes = {
+    onSubmitForm: React.PropTypes.func
+};
+
 const mapStateToProps = selectTodoInput();
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    onSubmitForm: (event) => {
+        event.preventDefault();
+
+        var task = event.target.elements.todoInput.value;
+        if (task) {
+          dispatch(defaultAction(task));
+        };
+      }
   };
 }
 

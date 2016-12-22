@@ -4,4 +4,4 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/TodoInput/DEFAULT_ACTION';
+export const NEWTASK_ACTION = 'app/TodoInput/NEWTASK_ACTION';

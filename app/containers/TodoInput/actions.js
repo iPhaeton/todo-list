@@ -5,11 +5,15 @@
  */
 
 import {
-  DEFAULT_ACTION,
+  NEWTASK_ACTION,
 } from './constants';
 
-export function defaultAction() {
+export function defaultAction(task) {
   return {
-    type: DEFAULT_ACTION,
+    type: NEWTASK_ACTION,
+    payload: {
+      task,
+      done:false
+    }
   };
 }

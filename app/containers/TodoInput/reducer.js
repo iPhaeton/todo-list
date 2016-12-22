@@ -6,15 +6,17 @@
 
 import { fromJS } from 'immutable';
 import {
-  DEFAULT_ACTION,
+  NEWTASK_ACTION,
 } from './constants';
 
-const initialState = fromJS({});
+const initialState = fromJS({
+  taskList: []
+});
 
 function todoInputReducer(state = initialState, action) {
   switch (action.type) {
-    case DEFAULT_ACTION:
-      return state;
+    case NEWTASK_ACTION:
+      return state.set('taskList', [...state.get("taskList"), action.payload]);
     default:
       return state;
   }
