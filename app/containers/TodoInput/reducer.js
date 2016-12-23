@@ -23,10 +23,10 @@ function todoInputReducer(state = initialState, action) {
     case CHANGETASK_ACTION:
       var taskList = state.get("taskList"),
           index = action.payload;
-      /*if (taskList[index].done) taskList[index].done = false;
-      else taskList[index].done = true;*/
       return state.set("taskList",
-        [...taskList.slice(0, index), {name: taskList[index].name, done: true}, ...taskList.slice(index + 1)]);
+        [...taskList.slice(0, index),
+          {name: taskList[index].name, done: taskList[index].done ? false : true},
+          ...taskList.slice(index + 1)]);
     default:
       return state;
   }
