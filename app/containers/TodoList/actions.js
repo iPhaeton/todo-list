@@ -5,11 +5,12 @@
  */
 
 import {
-  DEFAULT_ACTION,
+  CHANGETASK_ACTION,
 } from './constants';
 
-export function defaultAction() {
+export function defaultAction(index) {
   return {
-    type: DEFAULT_ACTION,
+    type: CHANGETASK_ACTION,
+    payload: index
   };
 }

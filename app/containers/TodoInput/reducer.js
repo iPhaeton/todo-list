@@ -8,6 +8,9 @@ import { fromJS } from 'immutable';
 import {
   NEWTASK_ACTION,
 } from './constants';
+import {
+  CHANGETASK_ACTION,
+} from '../TodoList/constants';
 
 const initialState = fromJS({
   taskList: []
@@ -17,6 +20,12 @@ function todoInputReducer(state = initialState, action) {
   switch (action.type) {
     case NEWTASK_ACTION:
       return state.set('taskList', [...state.get("taskList"), action.payload]);
+    case CHANGETASK_ACTION:
+      var taskList = state.get("taskList"),
+        index = action.payload;
+      if (taskList[index].done) taskList[index].done = false;
+      else taskList[index].done = true;
+      return state.set("taskList", taskList);
     default:
       return state;
   }

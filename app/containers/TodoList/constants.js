@@ -4,4 +4,4 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/TodoList/DEFAULT_ACTION';
+export const CHANGETASK_ACTION = 'app/TodoList/CHANGETASK_ACTION';
