@@ -24,7 +24,7 @@ export class TodoList extends React.PureComponent { // eslint-disable-line react
   }
 
   render() {
-    console.log(this.props);
+    //console.log(this.props);
     return (
       <div>
         {this.renderList()}
