@@ -7,7 +7,7 @@
 import React from 'react';
 
 import ItemPanel from "./ItemPanel";
-import CloseButton from "./CloseButton";
+import RemoveButton from "./RemoveButton";
 import ItemCheckbox from "./ItemCheckbox";
 
 function TodoItem(props) {
@@ -17,9 +17,9 @@ function TodoItem(props) {
         <ItemCheckbox type="checkbox" onClick={() => props.onDone(props.index)}/>
         {props.index + 1}. {props.item.name}
       </label>
-      <CloseButton>
+      <RemoveButton onClick={() => props.onRemove(props.index)}>
         <span className="glyphicon glyphicon-remove"></span>
-      </CloseButton>
+      </RemoveButton>
     </ItemPanel>
   );
 }

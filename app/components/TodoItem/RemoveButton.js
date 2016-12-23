@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const CloseButton = styled.div`
+const RemoveButton = styled.div`
     float: right;
     
     &:hover {
@@ -8,4 +8,4 @@ const CloseButton = styled.div`
     }
 `;
 
-export default CloseButton;
+export default RemoveButton;
