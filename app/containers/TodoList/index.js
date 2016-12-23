@@ -8,13 +8,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import selectTodoList from './selectors';
 
+import TodoItem from "../../components/TodoItem";
+
 export class TodoList extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   renderList() {
-    var arr = this.props.taskList.map((task) => {
+    var arr = this.props.taskList.map((task, i) => {
       return (
-        <div key={task.name}>
-          {task.name}
-        </div>
+        <TodoItem key={i} item={task} index={i} onDone={this.onDone.bind(this)}/>
       )
     });
 
@@ -28,6 +28,10 @@ export class TodoList extends React.PureComponent { // eslint-disable-line react
         {this.renderList()}
       </div>
     );
+  }
+
+  onDone () {
+    alert("Done");
   }
 }
 
