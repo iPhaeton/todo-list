@@ -14,11 +14,11 @@ export class TodoInput extends React.PureComponent { // eslint-disable-line reac
   render() {
     console.log(this.props);
 
-    /*if (!this.props.user) return (
+    if (!this.props.user) return (
       <div>
         <h3>Not authorized!</h3>
       </div>
-    );*/
+    );
 
     return (
       <div>
