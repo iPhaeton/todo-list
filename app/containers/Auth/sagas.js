@@ -1,5 +1,5 @@
-import {  takeEvery } from 'redux-saga';
-import {  take, call, put, select } from 'redux-saga/effects';
+import { takeEvery } from "redux-saga";
+import { take, call, put, fork, cancel, cancelled } from 'redux-saga/effects';
 
 import fetch from "./fetch";
 
@@ -11,10 +11,26 @@ import {
   AUTH_DENIED
 } from './constants';
 
-// Individual exports for testing
-export function* defaultSaga() {
-  yield takeEvery(AUTH_ACTION, fetchUser);
+import { LOCATION_CHANGE } from "react-router-redux";
+
+export function* authSaga () {
+  const authWatcher = yield fork(watchAuth);
+  yield take (LOCATION_CHANGE);
+  yield cancel (authWatcher);
 }
+
+function* watchAuth() {
+  try {
+    while (true) {
+      let action = yield take(AUTH_ACTION);
+      yield call(fetchUser, action);
+    };
+  } finally {
+    if (yield cancelled()) {
+      console.log ("Auth watcher cancelled");
+    };
+  };
+};
 
 function* fetchUser (action) {
   try {
@@ -28,5 +44,5 @@ function* fetchUser (action) {
 
 // All sagas to be loaded
 export default [
-  defaultSaga,
+  authSaga
 ];
