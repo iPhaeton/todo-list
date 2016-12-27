@@ -15,6 +15,7 @@ const initialState = fromJS({ user: null });
 function authReducer(state = initialState, action) {
   switch (action.type) {
     case AUTH_SUCCESS:
+      console.log(AUTH_SUCCESS);
       return state.set('user', action.payload);
     case AUTH_DENIED:
       console.log(action.payload);
