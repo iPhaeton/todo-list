@@ -1,5 +1,5 @@
 import { takeEvery } from "redux-saga";
-import { take, call, put, fork, cancel, cancelled } from 'redux-saga/effects';
+import { take, call, put, fork, cancel, cancelled, race } from 'redux-saga/effects';
 
 import fetch from "./fetch";
 
@@ -14,9 +14,10 @@ import {
 import { LOCATION_CHANGE } from "react-router-redux";
 
 export function* authSaga () {
-  const authWatcher = yield fork(watchAuth);
-  yield take (LOCATION_CHANGE);
-  yield cancel (authWatcher);
+  yield race ({
+    watchAuth: call(watchAuth),
+    cancel: take (LOCATION_CHANGE)
+  });
 }
 
 function* watchAuth() {
