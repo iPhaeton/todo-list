@@ -22,47 +22,50 @@ export function* startAuthSaga () {
 
 export function* authSaga () {
   try{
-    while (true) {
-      const { auth } = yield race ({
-        auth: take(AUTH_ACTION),
-        logout: take(LOGOUT)
-      });
+    yield fork(watchAuth);
 
-      if (auth) {
-        yield fork(watchAuth);
-        yield fork(fetchUser, auth);
-      }; /*else {
+    while (true) {
+      const auth = yield take(AUTH_ACTION);
+      const fetch = yield fork(fetchUser, auth);
+
+      //in case LOGOUT happens before authentication is finished
+      const nextAction = yield take([LOGOUT, AUTH_DENIED]);
+      if (nextAction.type === LOGOUT) {
         yield cancel(fetch);
-        log(module, "Canceled");
-      }*/
+      };
     };
   } finally {
-    log(module, "authSaga canceled");
+    log(module, "authSaga stopped");
   };
 };
 
 function* fetchUser (action) {
   try {
-    //yield put({type: LOGOUT});
     const user = yield call(fetch, action.payload);
     yield put({type: AUTH_SUCCESS, payload: user});
   } catch (err) {
     yield put({type: AUTH_DENIED, payload: err});
+  } finally {
+    log(module, "fetchUser stopped");
   }
 };
 
 function* watchAuth () {
-  while (true) {
-    log(module, "watch auth started");
-    const { success } = yield race ({
-      success: take(AUTH_SUCCESS),
-      denied: take(AUTH_DENIED)
-    });
+  try {
+    log(module, "watchAuth started");
+    while (true) {
+      const { success } = yield race ({
+        success: take(AUTH_SUCCESS),
+        denied: take(AUTH_DENIED)
+      });
 
-    if (success) {
-      yield call(router.browserHistory.push, '/todos');
+      if (success) {
+        yield call(router.browserHistory.push, '/todos');
+      };
     };
-  }
+  } finally {
+    log(module, "watchAuth stopped");
+  };
 };
 
 // All sagas to be loaded
