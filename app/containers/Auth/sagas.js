@@ -31,10 +31,10 @@ export function* authSaga () {
       if (auth) {
         yield fork(watchAuth);
         yield fork(fetchUser, auth);
-      } else {
-        yield cancel(fetchUser);
-        yield put(LOGOUT);
-      }
+      }; /*else {
+        yield cancel(fetch);
+        log(module, "Canceled");
+      }*/
     };
   } finally {
     log(module, "authSaga canceled");
@@ -43,6 +43,7 @@ export function* authSaga () {
 
 function* fetchUser (action) {
   try {
+    //yield put({type: LOGOUT});
     const user = yield call(fetch, action.payload);
     yield put({type: AUTH_SUCCESS, payload: user});
   } catch (err) {
@@ -53,8 +54,14 @@ function* fetchUser (action) {
 function* watchAuth () {
   while (true) {
     log(module, "watch auth started");
-    yield take(AUTH_SUCCESS);
-    yield call(router.browserHistory.push, '/todos');
+    const { success } = yield race ({
+      success: take(AUTH_SUCCESS),
+      denied: take(AUTH_DENIED)
+    });
+
+    if (success) {
+      yield call(router.browserHistory.push, '/todos');
+    };
   }
 };
 
