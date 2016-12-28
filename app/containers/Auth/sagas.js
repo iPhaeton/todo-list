@@ -35,8 +35,8 @@ function* watchAuth() {
 function* fetchUser (action) {
   try {
     const user = yield call(fetch, action.payload);
-    router.browserHistory.push('/todos');
     yield put({type: AUTH_SUCCESS, payload: user});
+    yield call(router.browserHistory.push, '/todos');
   } catch (err) {
     yield put({type: AUTH_DENIED, payload: err});
   }
