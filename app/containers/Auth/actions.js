@@ -13,5 +13,4 @@ export function defaultAction(user) {
     type: AUTH_ACTION,
     payload: user
   };
-
 }
