@@ -8,9 +8,10 @@ import {
   AUTH_ACTION
 } from './constants';
 
-export function defaultAction(user) {
+export function authAction(user) {
   return {
     type: AUTH_ACTION,
     payload: user
   };
 }
+

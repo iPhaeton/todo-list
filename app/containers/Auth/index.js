@@ -11,7 +11,7 @@ import selectAuth from './selectors';
 import Form from './Form';
 import Input from './Input';
 
-import { defaultAction } from './actions';
+import { authAction } from './actions';
 
 export class Auth extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -76,7 +76,7 @@ function mapDispatchToProps(dispatch) {
               password: event.target.elements.password.value
           };
           
-          dispatch(defaultAction(user));
+          dispatch(authAction(user));
       }
   };
 }
