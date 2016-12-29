@@ -32,6 +32,7 @@ export function* authSaga () {
       const nextAction = yield take([LOGOUT, AUTH_DENIED]);
       if (nextAction.type === LOGOUT) {
         yield cancel(fetch);
+        yield call(router.browserHistory.push, '/');
       };
     };
   } finally {
@@ -61,8 +62,6 @@ function* watchAuth () {
 
       if (success) {
         yield call(router.browserHistory.push, '/todos');
-        yield take(LOGOUT);
-        yield call(router.browserHistory.push, '/');
       };
     };
   } finally {
