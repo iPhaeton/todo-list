@@ -9,14 +9,16 @@ import {
   AUTH_ACTION,
   AUTH_SUCCESS,
   AUTH_DENIED,
-  LOGOUT
+  LOGOUT,
+  NEW_AUTHSAGA_STARTED
 } from './constants';
 
 import { LOCATION_CHANGE } from "react-router-redux";
 
 export function* startAuthSaga () {
+  yield put({type: NEW_AUTHSAGA_STARTED});
   const auth = yield fork(authSaga);
-  yield take (LOCATION_CHANGE);
+  yield take (NEW_AUTHSAGA_STARTED);
   yield cancel(auth);
 }
 
