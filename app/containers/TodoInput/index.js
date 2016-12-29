@@ -12,14 +12,6 @@ import { defaultAction } from './actions';
 
 export class TodoInput extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
-    console.log(this.props);
-
-    if (!this.props.user) return (
-      <div>
-        <h3>Not authorized!</h3>
-      </div>
-    );
-
     return (
       <div>
         <form onSubmit={this.props.onSubmitForm}>
