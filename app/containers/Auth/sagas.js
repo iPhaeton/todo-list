@@ -13,8 +13,6 @@ import {
   NEW_AUTHSAGA_STARTED
 } from './constants';
 
-import { LOCATION_CHANGE } from "react-router-redux";
-
 export function* startAuthSaga () {
   yield put({type: NEW_AUTHSAGA_STARTED});
   const auth = yield fork(authSaga);
@@ -63,6 +61,8 @@ function* watchAuth () {
 
       if (success) {
         yield call(router.browserHistory.push, '/todos');
+        yield take(LOGOUT);
+        yield call(router.browserHistory.push, '/');
       };
     };
   } finally {

@@ -59,7 +59,7 @@ export default function createRoutes(store) {
 
       getComponent(location, cb) {
         const importModules = Promise.all([
-          System.import('components/Todos'),
+          System.import('containers/Todos'),
           System.import('containers/TodoInput/reducer'),
           System.import('containers/TodoList/reducer')
         ]);

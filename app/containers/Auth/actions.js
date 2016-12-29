@@ -5,7 +5,8 @@
  */
 
 import {
-  AUTH_ACTION
+  AUTH_ACTION,
+  LOGOUT
 } from './constants';
 
 export function authAction(user) {
@@ -15,3 +16,8 @@ export function authAction(user) {
   };
 }
 
+export function logoutAction() {
+  return {
+    type: LOGOUT
+  };
+}
