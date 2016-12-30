@@ -2,6 +2,7 @@ import { take, call, put, fork, cancel, cancelled, race } from 'redux-saga/effec
 
 import fetch from "./fetch";
 import log from "../../log";
+import { AuthDeniedError } from "./errors";
 
 var router = require('react-router');
  
@@ -45,7 +46,13 @@ function* fetchUser (action) {
     const user = yield call(fetch, action.payload);
     yield put({type: AUTH_SUCCESS, payload: user});
   } catch (err) {
-    yield put({type: AUTH_DENIED, payload: err});
+    if (err instanceof AuthDeniedError) {
+      log(module, err);
+      yield put({type: AUTH_DENIED, payload: err.message});
+    } else {
+      log(module, err);
+      yield put({type: AUTH_DENIED, payload: "Server responded with an error"});
+    };
   } finally {
     log(module, "fetchUser stopped");
   }
