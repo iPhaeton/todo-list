@@ -1,3 +1,8 @@
 export default function (mod, str) {
-  console.log (`[${mod.i.split(/[\/\\]/).slice(-2).join("/")}] ${str}`);
+    if (typeof str === "string") {
+        console.log (`[${mod.i.split(/[\/\\]/).slice(-2).join("/")}] ${str}`);
+    } else {
+        console.log (`[${mod.i.split(/[\/\\]/).slice(-2).join("/")}]:`);
+        console.log (str);
+    }
 };
