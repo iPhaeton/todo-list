@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect';
 
+import log from "../../log";
+
 /**
  * Direct selector to the auth state domain
  */
@@ -16,7 +18,10 @@ const selectAuthDomain = () => (state) => state.get('auth');
 
 const selectAuth = () => createSelector(
   selectAuthDomain(),
-  (substate) => substate.toJS()
+  (substate) => {
+    log(substate);
+    return substate.toJS()
+  }
 );
 
 export default selectAuth;

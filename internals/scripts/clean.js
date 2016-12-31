@@ -47,8 +47,8 @@ cp('internals/templates/languageProvider/constants.js',
   'app/containers/LanguageProvider/constants.js');
 cp('internals/templates/languageProvider/languageProvider.js',
   'app/containers/LanguageProvider/index.js');
-cp('internals/templates/languageProvider/reducer.js',
-  'app/containers/LanguageProvider/reducer.js');
+cp('internals/templates/languageProvider/userReducer.js',
+  'app/containers/LanguageProvider/userReducer.js');
 cp('internals/templates/languageProvider/selectors.js',
   'app/containers/LanguageProvider/selectors.js');
 
