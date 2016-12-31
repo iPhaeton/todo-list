@@ -47,10 +47,10 @@ function* fetchUser (action) {
     yield put({type: AUTH_SUCCESS, payload: user});
   } catch (err) {
     if (err instanceof AuthDeniedError) {
-      log(module, err);
+      //log(module, err);
       yield put({type: AUTH_DENIED, payload: err.message});
     } else {
-      log(module, err);
+      //log(module, err);
       yield put({type: AUTH_DENIED, payload: "Server responded with an error"});
     };
   } finally {

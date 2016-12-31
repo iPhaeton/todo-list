@@ -59,7 +59,8 @@ export class Auth extends React.PureComponent { // eslint-disable-line react/pre
     }
 
     render() {
-      log(module, this.props.user);
+      log(module, this.props.user ? this.props.user.username : this.props.user);
+      log(module, this.props.error);
 
       return (
         <div className="container">

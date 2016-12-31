@@ -19,7 +19,7 @@ const selectAuthDomain = () => (state) => state.get('auth');
 const selectAuth = () => createSelector(
   selectAuthDomain(),
   (substate) => {
-    log(substate);
+    //log(module, substate);
     return substate.toJS()
   }
 );

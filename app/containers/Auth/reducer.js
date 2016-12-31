@@ -1,9 +1,12 @@
-import { combineReducers } from "redux";
+import { fromJS } from 'immutable';
 
 import user from "./reducers/userReducer";
 import error from "./reducers/errorReducer";
 
-export default combineReducers ({
-  user,
-  error
-});
+const initialState = fromJS({ user: null, error: "" });
+
+export default function (state = initialState, action) {
+  state = user(state, action);
+  state = error(state, action);
+  return state;
+}
