@@ -5,6 +5,7 @@ const Authorized = styled.div`
     padding: 15px;
     border-radius: 10px;
     color: #fff;
+    width: 100%;
     min-height: 100px;
 `;
 

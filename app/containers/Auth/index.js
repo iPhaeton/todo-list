@@ -12,6 +12,7 @@ import { bindActionCreators } from "redux";
 import Authorized from "./Authorized";
 import Form from './Form';
 import Input from './Input';
+import ErrMsg from "./ErrMsg";
 
 import { authAction } from './actions';
 import { logoutAction } from "../Auth/actions";
@@ -34,7 +35,7 @@ export class Auth extends React.PureComponent { // eslint-disable-line react/pre
       };
       
       return (
-        <Form className="col-sm-4 col-md-2" onSubmit={this.props.onSubmitForm}>
+        <Form onSubmit={this.props.onSubmitForm}>
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <Input
@@ -72,7 +73,10 @@ export class Auth extends React.PureComponent { // eslint-disable-line react/pre
           <div className="row">
             <div className="col-sm-10"></div>
 
-            {this.renderForm()}
+            <div className="col-sm-4 col-md-2">
+              {this.renderForm()}
+              <ErrMsg>{this.props.error}</ErrMsg>
+            </div>
           </div>
 
         </div>
