@@ -4,26 +4,23 @@
  *
  */
 
-import { fromJS } from 'immutable';
 import {
   AUTH_SUCCESS,
   AUTH_DENIED,
   LOGOUT
 } from '../constants';
 
-const initialState = fromJS({ user: null });
-
-function user(state = initialState, action) {
+function userReducer(state, action) {
   switch (action.type) {
     case AUTH_SUCCESS:
-      return state.set('user', action.payload);
+      return action.payload;
     case AUTH_DENIED:
-      return state.set('user', null);
+      return null;
     case LOGOUT:
-      return state.set('user', null);
+      return null;
     default:
-      return state;
+      return state.get("user");
   }
 };
 
-export default user;
+export default userReducer;

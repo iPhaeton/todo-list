@@ -4,23 +4,20 @@
  *
  */
 
-import { fromJS } from 'immutable';
 import {
   AUTH_SUCCESS,
   AUTH_DENIED
 } from '../constants';
 
-const initialState = fromJS({ error: "" });
-
-function error(state = initialState, action) {
+function errorReducer(state, action) {
   switch (action.type) {
     case AUTH_SUCCESS:
-      return state.set('error', "");
+      return "";
     case AUTH_DENIED:
-      return state.set('error', action.payload);
+      return action.payload;
     default:
-      return state;
+      return state.get("error");
   }
 };
 
-export default error;
+export default errorReducer;
