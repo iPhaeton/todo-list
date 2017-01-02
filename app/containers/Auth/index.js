@@ -10,8 +10,7 @@ import selectAuth from './selectors';
 import { bindActionCreators } from "redux";
 
 import Authorized from "./Authorized";
-import Form from './Form';
-import Input from './Input';
+import AuthForm from './AuthForm';
 import ErrMsg from "./ErrMsg";
 
 import { authAction } from './actions';
@@ -35,27 +34,7 @@ export class Auth extends React.PureComponent { // eslint-disable-line react/pre
       };
       
       return (
-        <Form onSubmit={this.props.onSubmitForm}>
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <Input
-              id="name"
-              type="text"
-              placeholder="Enter your name"
-              className="form-control"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <Input
-              id="password"
-              type="password"
-              placeholder="Enter your password"
-              className="form-control"
-            />
-          </div>
-          <input type="submit" value="Send" className="btn btn-default"/>
-        </Form>
+        <AuthForm onSubmit={this.props.onSubmitForm} />
       )
     }
 
@@ -92,12 +71,12 @@ const mapStateToProps = selectAuth();
 
 function mapDispatchToProps(dispatch) {
   return {
-      onSubmitForm: (event) => {
+      onSubmitForm: (values) => {
           event.preventDefault();
 
           var user = {
-              username: event.target.elements.name.value,
-              password: event.target.elements.password.value
+              username: values.get("name"),
+              password: values.get("password")
           };
           
           dispatch(authAction(user));
