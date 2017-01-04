@@ -8,13 +8,16 @@ const Form = styled.form`
     border-radius: 10px;
 `;
 
+const Input = styled.input`
+  border-color: ${props => props.error && props.touched ? "#f00" : "none"};
+`;
+
 const renderField = ({ input, label, placeholder, type, meta: { touched, error } }) => {
   return (
     <div>
       <label>{label}</label>
       <div>
-        <input {...input} type={type} placeholder={placeholder} className="form-control"/>
-        {touched && error && <span>{error}</span>}
+        <Input {...input} type={type} placeholder={touched && error || placeholder} error={error} touched={touched} className="form-control"/>
       </div>
     </div>
   );
@@ -46,15 +49,16 @@ const AuthForm = (props) => {
   )
 };
 
-/*const validate = (values) => {
+const validate = (values) => {
   let errors = {};
 
-  if (!values.name) errors.name = "Required";
+  if (!values.get("name")) errors.name = "Name is Required";
+  if (!values.get("password")) errors.password = "Password is required";
 
   return errors;
-};*/
+};
 
 export default reduxForm ({
   form: "authForm",
-  //validate
+  validate
 })(AuthForm);

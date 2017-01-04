@@ -72,8 +72,6 @@ const mapStateToProps = selectAuth();
 function mapDispatchToProps(dispatch) {
   return {
       onSubmitForm: (values) => {
-          event.preventDefault();
-
           var user = {
               username: values.get("name"),
               password: values.get("password")
