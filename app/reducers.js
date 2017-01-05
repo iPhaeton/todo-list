@@ -20,8 +20,10 @@ import { reducer as formReducer } from  "redux-form/immutable";
  */
 
 // Initial routing state
+const router = require("react-router");
+
 const routeInitialState = fromJS({
-  locationBeforeTransitions: null,
+  locationBeforeTransitions: router.browserHistory.getCurrentLocation(),
 });
 
 /**
