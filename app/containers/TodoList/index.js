@@ -30,6 +30,7 @@ export class TodoList extends React.PureComponent { // eslint-disable-line react
   renderControls () {
     return (
       <ControlPanel className="panel panel-default">
+        <p>{this.props.tasksLeft} tasks to do</p>
         <ControlButton
           value="All"
           onClick={this.props.setFlag}

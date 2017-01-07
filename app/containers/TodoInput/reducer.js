@@ -17,18 +17,30 @@ import {
 } from "../Auth/constants";
 
 const initialState = fromJS({
-  taskList: []
+  taskList: [],
+  tasksLeft: 0
 });
 
 function todoInputReducer(state = initialState, action) {
   switch (action.type) {
     case NEWTASK_ACTION:
-      return state.setIn(['taskList', state.get("taskList").size], fromJS(action.payload));
+      console.log(state);
+      return state.withMutations((state) => {
+        state.setIn(['taskList', state.get("taskList").size], fromJS(action.payload))
+          .set("tasksLeft", state.get("tasksLeft")+1);
+      });
     case CHANGETASK_ACTION:
-      return state.updateIn(["taskList", action.payload, "done"], value => value ? false : true);
+      return state.withMutations((state) => {
+        state.updateIn(["taskList", action.payload, "done"], value => value ? false : true)
+          .set("tasksLeft", state.getIn(["taskList", action.payload, "done"])
+            ? state.get("tasksLeft")-1 : state.get("tasksLeft")+1);
+      });
     case REMOVETASK_ACTION:
-      console.log(state.getIn(["taskList", action.payload]));
-      return state.deleteIn(["taskList", action.payload]);
+      return state.withMutations((state) => {
+        state.set("tasksLeft", state.getIn(["taskList", action.payload, "done"])
+          ? state.get("tasksLeft") : state.get("tasksLeft")-1)
+          .deleteIn(["taskList", action.payload]);
+      });
     case LOGOUT:
       return state.set("taskList", initialState);
     default:
