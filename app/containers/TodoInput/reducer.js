@@ -23,21 +23,14 @@ const initialState = fromJS({
 function todoInputReducer(state = initialState, action) {
   switch (action.type) {
     case NEWTASK_ACTION:
-      return state.set('taskList', [...state.get("taskList"), action.payload]);
+      return state.setIn(['taskList', state.get("taskList").size], fromJS(action.payload));
     case CHANGETASK_ACTION:
-      var taskList = state.get("taskList"),
-          index = action.payload;
-      return state.set("taskList",
-        [...taskList.slice(0, index),
-          {name: taskList[index].name, done: taskList[index].done ? false : true},
-          ...taskList.slice(index + 1)]);
+      return state.updateIn(["taskList", action.payload, "done"], value => value ? false : true);
     case REMOVETASK_ACTION:
-      var taskList = state.get("taskList"),
-          index = action.payload;
-      return state.set("taskList",
-        [...taskList.slice(0, index), ...taskList.slice(index + 1)]);
+      console.log(state.getIn(["taskList", action.payload]));
+      return state.deleteIn(["taskList", action.payload]);
     case LOGOUT:
-      return state.set("taskList", []);
+      return state.set("taskList", initialState);
     default:
       return state;
   }
