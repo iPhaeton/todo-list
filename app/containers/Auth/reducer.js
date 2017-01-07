@@ -9,6 +9,6 @@ export default function (state = initialState, action) {
   const user = userReducer(state, action);
   const error = errorReducer(state, action);
   return state.withMutations((state) => {
-    state.set("user", user).set("error", error);
+    state.set("user", fromJS(user)).set("error", fromJS(error));
   });
 };
