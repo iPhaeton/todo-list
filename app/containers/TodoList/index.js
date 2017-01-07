@@ -9,27 +9,53 @@ import { connect } from 'react-redux';
 import selectTodoList from './selectors';
 
 import TodoItem from "../../components/TodoItem";
+import ControlPanel from "./ControlPanel";
 
 import { changeAction, removeAction } from "./actions";
 
 export class TodoList extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  renderList() {
-    var arr = this.props.taskList.map((task, i) => {
-      return (
-        <TodoItem key={i} item={task} index={i} onDone={this.props.onDone.bind(this)} onRemove={this.props.onRemove.bind(this)}/>
-      )
-    });
+  constructor (props) {
+    super(props);
+    this.state = {
+      flag: null
+    };
+  }
 
-    return arr;
+  renderList() {
+    const self = this;
+
+    return this.props.taskList.map((task, i) => {
+      if (self.state.flag === null || self.state.flag === task.done) {
+        return (
+          <TodoItem key={i} item={task} index={i} onDone={this.props.onDone.bind(this)} onRemove={this.props.onRemove.bind(this)}/>
+        )
+      } else return null;
+    });
+  }
+
+  renderControls () {
+    return (
+      <ControlPanel className="panel panel-default">
+        <button onClick={() => this.setFlag(null)}>All</button>
+        <button onClick={() => this.setFlag(false)}>Active</button>
+        <button onClick={() => this.setFlag(true)}>Completed</button>
+      </ControlPanel>
+    )
   }
 
   render() {
-    //console.log(this.props);
     return (
       <div>
-        {this.renderList()}
+        <div>
+          {this.renderList()}
+        </div>
+        {this.props.taskList.length ? this.renderControls() : null}
       </div>
     );
+  }
+
+  setFlag (flag) {
+    this.setState({flag});
   }
 }
 
