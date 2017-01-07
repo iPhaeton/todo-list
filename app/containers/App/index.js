@@ -13,6 +13,8 @@
 
 import React from 'react';
 
+import log from "../../log";
+
 export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
@@ -20,9 +22,18 @@ export default class App extends React.PureComponent { // eslint-disable-line re
   };
 
   render() {
+    log(module, React.Children.toArray(this.props.children));
     return (
-      <div>
-        {React.Children.toArray(this.props.children)}
+      <div className="container">
+
+        <header>
+          <h1> TODOS </h1>
+        </header>
+
+        <div>
+          {React.Children.toArray(this.props.children)}
+        </div>
+
       </div>
     );
   }

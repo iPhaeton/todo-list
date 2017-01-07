@@ -64,21 +64,13 @@ export class Auth extends React.PureComponent { // eslint-disable-line react/pre
       log(module, this.props.error);
 
       return (
-        <div className="container">
+        <div className="row">
+          <div className="col-sm-10"></div>
 
-          <header>
-            <h1> TODOS </h1>
-          </header>
-
-          <div className="row">
-            <div className="col-sm-10"></div>
-
-            <div className="col-sm-4 col-md-2">
-              {this.renderForm()}
-              <ErrMsg>{this.props.error}</ErrMsg>
-            </div>
+          <div className="col-sm-4 col-md-2">
+            {this.renderForm()}
+            <ErrMsg>{this.props.error}</ErrMsg>
           </div>
-
         </div>
       );
     }

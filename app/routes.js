@@ -18,22 +18,6 @@ export default function createRoutes(store) {
 
   return [
     {
-      path: '/home',
-      name: 'home',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          System.import('containers/HomePage'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([component]) => {
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    }, {
       path: '/',
       name: 'auth',
       getComponent(nextState, cb) {
