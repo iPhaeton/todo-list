@@ -12,6 +12,9 @@ import {
   CHANGETASK_ACTION,
   REMOVETASK_ACTION
 } from '../TodoList/constants';
+import {
+  LOGOUT
+} from "../Auth/constants";
 
 const initialState = fromJS({
   taskList: []
@@ -33,6 +36,8 @@ function todoInputReducer(state = initialState, action) {
           index = action.payload;
       return state.set("taskList",
         [...taskList.slice(0, index), ...taskList.slice(index + 1)]);
+    case LOGOUT:
+      return state.set("taskList", []);
     default:
       return state;
   }

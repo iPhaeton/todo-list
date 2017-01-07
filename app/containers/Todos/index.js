@@ -38,4 +38,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({logoutAction}, dispatch);
 };
 
-export default connect(selectTodos, mapDispatchToProps)(Todos);
+export default connect(mapStateToProps, mapDispatchToProps)(Todos);
