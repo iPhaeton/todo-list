@@ -11,21 +11,14 @@ import selectTodoList from './selectors';
 import TodoItem from "../../components/TodoItem";
 import ControlPanel from "./ControlPanel";
 
-import { changeAction, removeAction } from "./actions";
+import { changeAction, removeAction, changeFlagAction } from "./actions";
 
 export class TodoList extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  constructor (props) {
-    super(props);
-    this.state = {
-      flag: null
-    };
-  }
-
   renderList() {
     const self = this;
 
     return this.props.taskList.map((task, i) => {
-      if (self.state.flag === null || self.state.flag === task.done) {
+      if (self.props.flag === null || self.props.flag === task.done) {
         return (
           <TodoItem key={i} item={task} index={i} onDone={this.props.onDone.bind(this)} onRemove={this.props.onRemove.bind(this)}/>
         )
@@ -36,9 +29,9 @@ export class TodoList extends React.PureComponent { // eslint-disable-line react
   renderControls () {
     return (
       <ControlPanel className="panel panel-default">
-        <button onClick={() => this.setFlag(null)}>All</button>
-        <button onClick={() => this.setFlag(false)}>Active</button>
-        <button onClick={() => this.setFlag(true)}>Completed</button>
+        <button onClick={() => this.props.setFlag(null)}>All</button>
+        <button onClick={() => this.props.setFlag(false)}>Active</button>
+        <button onClick={() => this.props.setFlag(true)}>Completed</button>
       </ControlPanel>
     )
   }
@@ -52,10 +45,6 @@ export class TodoList extends React.PureComponent { // eslint-disable-line react
         {this.props.taskList.length ? this.renderControls() : null}
       </div>
     );
-  }
-
-  setFlag (flag) {
-    this.setState({flag});
   }
 }
 
@@ -74,6 +63,10 @@ function mapDispatchToProps(dispatch) {
     
     onRemove: (index) => {
       dispatch(removeAction(index));
+    },
+
+    setFlag (flag) {
+      dispatch(changeFlagAction(flag));
     }
   };
 }

@@ -6,7 +6,8 @@
 
 import {
   CHANGETASK_ACTION,
-  REMOVETASK_ACTION
+  REMOVETASK_ACTION,
+  CHANGEFLAG_ACTION
 } from './constants';
 
 export function changeAction(index) {
@@ -20,5 +21,12 @@ export function removeAction(index) {
   return {
     type: REMOVETASK_ACTION,
     payload: index
+  };
+}
+
+export function changeFlagAction(flag) {
+  return {
+    type: CHANGEFLAG_ACTION,
+    payload: flag
   };
 }

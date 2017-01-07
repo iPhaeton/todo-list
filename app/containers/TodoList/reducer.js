@@ -6,10 +6,14 @@
 
 import { fromJS } from 'immutable';
 
-const initialState = fromJS({});
+import { CHANGEFLAG_ACTION } from "./constants"
+
+const initialState = fromJS({flag: null});
 
 function todoListReducer(state = initialState, action) {
   switch (action.type) {
+    case CHANGEFLAG_ACTION:
+      return state.set("flag", action.payload);
     default:
       return state;
   }
