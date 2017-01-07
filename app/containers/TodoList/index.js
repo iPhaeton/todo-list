@@ -10,6 +10,7 @@ import selectTodoList from './selectors';
 
 import TodoItem from "../../components/TodoItem";
 import ControlPanel from "./ControlPanel";
+import ControlButton from "./ControlButton";
 
 import { changeAction, removeAction, changeFlagAction } from "./actions";
 
@@ -29,9 +30,24 @@ export class TodoList extends React.PureComponent { // eslint-disable-line react
   renderControls () {
     return (
       <ControlPanel className="panel panel-default">
-        <button onClick={() => this.props.setFlag(null)}>All</button>
-        <button onClick={() => this.props.setFlag(false)}>Active</button>
-        <button onClick={() => this.props.setFlag(true)}>Completed</button>
+        <ControlButton
+          value="All"
+          onClick={this.props.setFlag}
+          buttonFlag={null}
+          listFlag={this.props.flag}
+        />
+        <ControlButton
+          value="Active"
+          onClick={this.props.setFlag}
+          buttonFlag={false}
+          listFlag={this.props.flag}
+        />
+        <ControlButton
+          value="Completed"
+          onClick={this.props.setFlag}
+          buttonFlag={true}
+          listFlag={this.props.flag}
+        />
       </ControlPanel>
     )
   }
